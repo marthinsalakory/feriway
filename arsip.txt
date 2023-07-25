@@ -1,0 +1,24 @@
+CREATE VIEW v_pemesanan AS
+
+SELECT pemesanan.*,
+
+data_kapal.nama as nama_kapal, 
+data_kapal.nama_bank as nama_bank2, 
+data_kapal.nomor_rekening as nomor_rekening2,
+data_kapal.pemegang_rekening as pemegang_rekening2,
+data_kapal.kode_bank as kode_bank2,
+
+data_tiket.tanggal_keberangkatan,
+data_tiket.waktu_keberangkatan,
+data_tiket.asal,
+data_tiket.tujuan,
+data_tiket.status as tiket_status,
+
+harga_tiket.harga,
+harga_tiket.keterangan,
+harga_tiket.pakai_kendaraan
+
+FROM pemesanan
+INNER JOIN data_kapal ON pemesanan.kapal_id = data_kapal.id
+INNER JOIN data_tiket ON pemesanan.tiket_id = data_tiket.id
+INNER JOIN harga_tiket ON pemesanan.harga_tiket_id = harga_tiket.id;
