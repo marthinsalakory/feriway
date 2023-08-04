@@ -216,7 +216,7 @@ include 'header.php'; ?>
                                         </tr>
                                     </thead>
                                     <tbody class="text-center">
-                                        <?php foreach (db_findAll('data_tiket') as $tkt) : ?>
+                                        <?php foreach (db_query('SELECT * FROM data_tiket ORDER BY tanggal_keberangkatan ASC') as $tkt) : ?>
                                             <tr>
                                                 <td>
                                                     <a href="harga.php?atas=<?= $tkt['id']; ?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Kelola Harga Tiket"><i class="fa-solid fa-rupiah-sign"></i></a>

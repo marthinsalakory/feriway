@@ -64,7 +64,7 @@ include 'header.php'; ?>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach (db_findAll('data_tiket') as $tkt) : ?>
+                            <?php foreach (db_query('SELECT * FROM data_tiket ORDER BY tanggal_keberangkatan ASC') as $tkt) : ?>
                                 <?php if ($tkt['status']) { ?>
                                     <tr onclick="window.location.href='harga.php?id=<?= $tkt['id']; ?>';" style="cursor: pointer;">
                                         <td><?= ubahHari(date('l', strtotime($tkt['tanggal_keberangkatan']))) . date(', d-m-Y', strtotime($tkt['tanggal_keberangkatan'])); ?></td>

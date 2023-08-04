@@ -11,7 +11,7 @@ if (isset($_SESSION['login'])) {
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>FeriWay</title>
+    <title>FerryWaai</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -53,7 +53,7 @@ if (isset($_SESSION['login'])) {
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top d-flex align-items-center">
         <div class="container d-flex align-items-center">
-            <h1 class="logo me-auto"><a href="index.php">FeriWay<span>.</span></a></h1>
+            <h1 class="logo me-auto"><a href="index.php">FerryWaai<span>.</span></a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt=""></a>-->
 
@@ -63,7 +63,9 @@ if (isset($_SESSION['login'])) {
                     <li><a class="nav-link scrollto" href="<?= $nav_on != 'index' ? 'index.php' : ''; ?>#about">Tentang</a></li>
                     <li><a class="nav-link scrollto" href="<?= $nav_on != 'index' ? 'index.php' : ''; ?>#pengumuman">Pengumuman</a></li>
                     <li><a class="nav-link scrollto" href="<?= $nav_on != 'index' ? 'index.php' : ''; ?>#agenda">Agenda</a></li>
-                    <li><a class="<?= $nav_on == 'pemesanan' ? 'active' : ''; ?>" href="pemesanan.php">Riwayat Pemesanan</a></li>
+                    <?php if (isset($_SESSION['login'])) : ?>
+                        <li><a class="<?= $nav_on == 'pemesanan' ? 'active' : ''; ?>" href="pemesanan.php">Riwayat Pemesanan</a></li>
+                    <?php endif; ?>
                     <li><a class="nav-link scrollto" href="<?= $nav_on != 'index' ? 'index.php' : ''; ?>#contact">Kontak</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>

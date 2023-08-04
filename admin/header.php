@@ -58,7 +58,7 @@
                         <i class="fas fa-user"></i>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Profil <i style="margin-left: 57px;" class="fa fa-user"></i></a>
+                        <!-- <a class="dropdown-item" href="#">Profil <i style="margin-left: 57px;" class="fa fa-user"></i></a> -->
                         <a class="dropdown-item" href="../auth.php?logout">Keluar <i style="margin-left: 50px;" class="fa fa-right-from-bracket"></i></a>
                     </div>
                 </li>

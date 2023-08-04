@@ -17,6 +17,41 @@ if (isset($_POST['bayar'])) {
     if (db_count('pemesanan', ['kode_referensi' => $_POST['kode_referensi']])) {
         setFlash('Kode referensi anda sudah kadalwarsa');
     }
+
+    $uniqueFileName = '';
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['slip_pembayaran'])) {
+        $uploadDir = 'uploads/'; // Ganti dengan direktori tempat berkas akan disimpan
+        $fileInfo = $_FILES['slip_pembayaran'];
+
+        $fileName = $fileInfo['name'];
+        $fileTmpName = $fileInfo['tmp_name'];
+        $fileSize = $fileInfo['size'];
+        $fileError = $fileInfo['error'];
+
+        // Cek apakah tidak ada error pada unggahan
+        if ($fileError === UPLOAD_ERR_OK) {
+            // Pastikan hanya file dengan ekstensi tertentu yang diizinkan untuk diunggah
+            $allowedExtensions = array('pdf', 'jpg', 'jpeg', 'png');
+            $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
+            if (in_array(strtolower($fileExtension), $allowedExtensions)) {
+                // Buat nama unik untuk berkas yang diunggah
+                $uniqueFileName = uniqid('slip_') . '.' . $fileExtension;
+                $destination = $uploadDir . $uniqueFileName;
+
+                // Pindahkan berkas ke folder tujuan
+                if (move_uploaded_file($fileTmpName, $destination)) {
+                } else {
+                    setFlash("Gagal mengunggah berkas.");
+                }
+            } else {
+                setFlash("Ekstensi berkas tidak diizinkan. Hanya file PDF, JPG, JPEG, dan PNG yang diizinkan.");
+            }
+        } else {
+            setFlash("Terjadi kesalahan saat mengunggah berkas.");
+        }
+    }
+
     if (!isFlash()) {
         if (db_insert('pemesanan', [
             'pengguna_id' => $_SESSION['login'],
@@ -27,7 +62,7 @@ if (isset($_POST['bayar'])) {
             'nomor_rekening' => $_POST['nomor_rekening'],
             'pemegang_rekening' => $_POST['pemegang_rekening'],
             'kode_referensi' => $_POST['kode_referensi'],
-            'slip_pembayaran' => $_POST['slip_pembayaran'],
+            'slip_pembayaran' => $uniqueFileName,
             'merek_kendaraan' => $_POST['merek_kendaraan'],
             'tipe_kendaraan' => $_POST['tipe_kendaraan'],
             'nomor_polisi' => $_POST['nomor_polisi'],

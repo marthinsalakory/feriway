@@ -1,4 +1,5 @@
 <?php
+include 'function.php';
 $sidebar_on = 'dashboard';
 include 'header.php'; ?>
 <!-- Main content -->
@@ -10,12 +11,12 @@ include 'header.php'; ?>
         <!-- small box -->
         <div class="small-box bg-info">
           <div class="inner">
-            <h3>14</h3>
+            <h3><?= db_count('data_kapal'); ?></h3>
 
-            <p>Kendaraan</p>
+            <p>Ferry</p>
           </div>
           <div class="icon">
-            <i class="fa fa-car"></i>
+            <i class="fa-solid fa-ferry"></i>
           </div>
           <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
         </div>
@@ -25,12 +26,12 @@ include 'header.php'; ?>
         <!-- small box -->
         <div class="small-box bg-success">
           <div class="inner">
-            <h3>14</h3>
+            <h3><?= db_count('pengguna'); ?></h3>
 
-            <p>Pengemudi</p>
+            <p>Pengguna</p>
           </div>
           <div class="icon">
-            <i class="fa fa-user"></i>
+            <i class="fa fa-users"></i>
           </div>
           <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
         </div>
@@ -40,12 +41,12 @@ include 'header.php'; ?>
         <!-- small box -->
         <div class="small-box bg-warning">
           <div class="inner">
-            <h3>4</h3>
+            <h3><?= db_count('data_tiket', ['status' => 1]); ?></h3>
 
-            <p>Outlet</p>
+            <p>Tiket Aktif</p>
           </div>
           <div class="icon">
-            <i class="fa fa-university"></i>
+            <i class="fa fa-ticket"></i>
           </div>
           <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
         </div>
@@ -55,12 +56,12 @@ include 'header.php'; ?>
         <!-- small box -->
         <div class="small-box bg-danger">
           <div class="inner">
-            <h3>19</h3>
+            <h3><?= db_count('pemesanan'); ?></h3>
 
-            <p>Jadwal</p>
+            <p>Pemesanan</p>
           </div>
           <div class="icon">
-            <i class="fa fa-calendar"></i>
+            <i class="fa fa-table"></i>
           </div>
           <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
         </div>

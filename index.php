@@ -9,7 +9,7 @@ include 'header.php'; ?>
   <div class="container" data-aos="zoom-out" data-aos-delay="100">
     <div class="row">
       <div class="col-xl-6">
-        <h1>FeriWay</h1>
+        <h1>FerryWaai</h1>
         <h2>Solusi Mudah Pemesanan Tiket Feri Online</h2>
         <a href="#about" class="btn-get-started scrollto">Selanjutnya</a>
       </div>
@@ -202,7 +202,7 @@ include 'header.php'; ?>
                     </tr>
                   </thead>
                   <tbody>
-                    <?php foreach (db_findAll('data_tiket', ['status' => 1]) as $tkt) : ?>
+                    <?php foreach (db_query('SELECT * FROM data_tiket WHERE status = 1 ORDER BY tanggal_keberangkatan ASC') as $tkt) : ?>
                       <tr onclick="window.location.href='harga.php?id=<?= $tkt['id']; ?>';" style="cursor: pointer;">
                         <td><?= ubahHari(date('l', strtotime($tkt['tanggal_keberangkatan']))) . date(', d-m-Y', strtotime($tkt['tanggal_keberangkatan'])); ?></td>
                         <td><?= $tkt['waktu_keberangkatan']; ?></td>

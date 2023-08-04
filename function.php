@@ -137,6 +137,18 @@ function db_find($table, $where)
     return $result->fetch_object();
 }
 
+function db_find_array($table, $where)
+{
+    $conditions = [];
+    foreach ($where as $key => $val) {
+        $conditions[] = "$key = '$val'";
+    }
+    $conditionString = implode(' AND ', $conditions);
+    $query = "SELECT * FROM `$table` WHERE $conditionString";
+    $result = db_query($query);
+    return $result->fetch_array();
+}
+
 
 function db_findOr($table, $where)
 {
@@ -214,4 +226,18 @@ function isLogin()
     if (isset($_SESSION['login_maedonor'])) {
         redirect('admin');
     }
+}
+
+
+// Impor library QR code
+require 'vendor/autoload.php'; // Sesuaikan jalur dengan kebutuhan Anda
+
+use Endroid\QrCode\QrCode;
+
+// Fungsi untuk membuat QR code
+function generateQRCode($data, $size = 300)
+{
+    $qrCode = new QrCode($data);
+    $qrCode->setSize($size);
+    return $qrCode->writeString();
 }

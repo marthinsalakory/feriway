@@ -22,6 +22,7 @@ if (isset($_POST['tambah'])) {
         'tiket_id' => $tkt->id,
         'harga' => $_POST['harga'],
         'keterangan' => $_POST['keterangan'],
+        'warna' => $_POST['warna'],
         'pakai_kendaraan' => $pakai_kendaraan,
     ])) {
         setFlash('Berhasil Menambahkan Data');
@@ -42,6 +43,7 @@ if (isset($_POST['ubah'])) {
         'tiket_id' => $tkt->id,
         'harga' => $_POST['harga'],
         'keterangan' => $_POST['keterangan'],
+        'warna' => $_POST['warna'],
         'pakai_kendaraan' => $pakai_kendaraan,
     ])) {
         setFlash('Berhasil Mengubah Data');
@@ -153,6 +155,10 @@ include 'header.php'; ?>
                                     <label for="keterangan">Keterangan</label>
                                     <input type="text" name="keterangan" id="keterangan" class="form-control">
                                 </div>
+                                <div class="col-12">
+                                    <label for="warna">Warna Tiket</label>
+                                    <input type="color" name="warna" id="warna" class="form-control" value="#fffff">
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -208,6 +214,10 @@ include 'header.php'; ?>
                                     <div class="col-md-6">
                                         <label for="keterangan">Keterangan</label>
                                         <input type="text" name="keterangan" id="keterangan" class="form-control" value="<?= $p->keterangan; ?>">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="warna">Warna Tiket</label>
+                                        <input type="color" name="warna" id="warna" class="form-control" value="<?= $p->warna; ?>">
                                     </div>
                                 <?php } else { ?>
                                     <div class="col-12 text-center">

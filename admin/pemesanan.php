@@ -15,6 +15,14 @@ if (isset($_POST['status'])) {
   }
 }
 
+if (isset($_GET['hapus'])) {
+  $pms = db_find('pemesanan', ['id' => $_GET['hapus']]);
+  if (db_delete('pemesanan', ['id' => $_GET['hapus']])) {
+    unlink('../uploads/' . $pms->slip_pembayaran);
+  }
+  setFlash('Berhasil hapus 1 data pemesanan');
+  redirectBack();
+}
 $sidebar_on = 'pemesanan';
 include 'header.php'; ?>
 <!-- Main content -->
@@ -36,6 +44,7 @@ include 'header.php'; ?>
               <table class="table table-bordered" id="example3">
                 <thead class="bg-primary text-light text-center">
                   <tr>
+                    <th>Aksi</th>
                     <th>Ubah Status Pembayaran</th>
                     <th>Nama Bank</th>
                     <th>Nomor Rekening Pengirim</th>
@@ -66,6 +75,7 @@ include 'header.php'; ?>
                 <tbody class="text-center">
                   <?php foreach (db_findAll('v_pemesanan') as $v) : ?>
                     <tr>
+                      <td><a href="?hapus=<?= $v['id']; ?>" onclick="return confirm('Hapus?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>
                       <td>
                         <form method="POST">
                           <input type="hidden" name="id" value="<?= $v['id']; ?>">
@@ -80,7 +90,7 @@ include 'header.php'; ?>
                       <td><?= $v['nomor_rekening']; ?></td>
                       <td><?= $v['pemegang_rekening']; ?></td>
                       <td><?= $v['kode_referensi']; ?></td>
-                      <td><a href="<?= $v['slip_pembayaran']; ?>" class="text-success"><i class="fa fa-file"></i></a></td>
+                      <td><a href="../uploads/<?= $v['slip_pembayaran']; ?>" class="text-success"><i class="fa fa-file"></i></a></td>
                       <td><?= $v['merek_kendaraan']; ?></td>
                       <td><?= $v['tipe_kendaraan']; ?></td>
                       <td><?= $v['nomor_polisi']; ?></td>
